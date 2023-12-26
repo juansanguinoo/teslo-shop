@@ -1,7 +1,9 @@
+import { Title } from "@/components";
+
 export default function Home() {
   return (
-    <main>
-      <h1>Shop Page</h1>
-    </main>
+    <>
+      <Title title="Tienda" subtitle="Todos los productos" className="mb-2" />
+    </>
   );
 }
