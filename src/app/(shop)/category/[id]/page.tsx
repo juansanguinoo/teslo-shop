@@ -1,6 +1,7 @@
 import { ProductGrid, Title } from "@/components";
 import { Category } from "@/interfaces";
 import { initialData } from "@/seed/seed";
+import { notFound } from "next/navigation";
 
 const seedProducts = initialData.products;
 
@@ -19,6 +20,10 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     kid: "para Niños",
     unisex: "para Todos",
   };
+
+  if (!products.length) {
+    notFound();
+  }
 
   return (
     <>
