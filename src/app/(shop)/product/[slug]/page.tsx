@@ -1,4 +1,9 @@
-import { QuantitySelector, SizeSelector, Slideshow } from "@/components";
+import {
+  QuantitySelector,
+  SizeSelector,
+  Slideshow,
+  SlideshowMobile,
+} from "@/components";
 import { montserrat } from "@/config/font";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
@@ -20,7 +25,17 @@ export default function ProductPage({ params }: ProductPageProps) {
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
       <div className="col-span-1 md:col-span-2">
-        <Slideshow images={product.images} title={product.title} />
+        <SlideshowMobile
+          images={product.images}
+          title={product.title}
+          className="block md:hidden"
+        />
+
+        <Slideshow
+          images={product.images}
+          title={product.title}
+          className="hidden md:block"
+        />
       </div>
 
       <div className="col-span-1 px-5">
