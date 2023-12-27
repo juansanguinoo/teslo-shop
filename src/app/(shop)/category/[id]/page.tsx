@@ -1,21 +1,34 @@
-import { notFound } from "next/navigation";
+import { ProductGrid, Title } from "@/components";
+import { Category } from "@/interfaces";
+import { initialData } from "@/seed/seed";
+
+const seedProducts = initialData.products;
 
 interface CategoryPageProps {
   params: {
-    id: string;
+    id: Category;
   };
 }
 
 export default function CategoryPage({ params }: CategoryPageProps) {
   const { id } = params;
-
-  if (id === "kids") {
-    notFound();
-  }
+  const products = seedProducts.filter((product) => product.gender === id);
+  const labels: Record<Category, string> = {
+    men: "para Hombres",
+    women: "para Mujeres",
+    kid: "para Niños",
+    unisex: "para Todos",
+  };
 
   return (
-    <div>
-      <h1>Category Page</h1>
-    </div>
+    <>
+      <Title
+        title={`Tienda ${labels[id]}`}
+        subtitle="Todos los productos"
+        className="mb-2"
+      />
+
+      <ProductGrid products={products} />
+    </>
   );
 }
