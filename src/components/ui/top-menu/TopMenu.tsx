@@ -1,9 +1,14 @@
+"use client";
+
 import { montserrat } from "@/config/font";
+import { useUIstore } from "@/store";
 import Link from "next/link";
 import React from "react";
 import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
 
 export const TopMenu = () => {
+  const openSideMenu = useUIstore((state) => state.openSideMenu);
+
   return (
     <nav className="flex px-5 justify-between items-center w-full">
       <div>
@@ -50,7 +55,10 @@ export const TopMenu = () => {
           </div>
         </Link>
 
-        <button className="m-2 p-2 rounded-md transition-all hover:bg-gray-100">
+        <button
+          className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
+          onClick={() => openSideMenu()}
+        >
           Menú
         </button>
       </div>
