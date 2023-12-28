@@ -45,8 +45,16 @@ model Product {
 
   category    Category  @relation(fields: [categoryId], references: [id])
   categoryId  String
+  images      ProductImage[]
 
   @@index([gender])
+}
+
+model ProductImage {
+  id          Int    @id @default(autoincrement())
+  url         String
+  product     Product   @relation(fields: [productId], references: [id])
+  productId   String
 }
 
 
