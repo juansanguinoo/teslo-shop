@@ -3,8 +3,11 @@ import type { Metadata } from "next";
 import { inter } from "@/config/font";
 
 export const metadata: Metadata = {
-  title: "Teslo | Shop",
-  description: "Teslo Shop",
+  title: {
+    template: "%s | Teslo Shop",
+    default: "Home | Teslo Shop",
+  },
+  description: "Online shop for Teslo products",
 };
 
 export default function RootLayout({

@@ -9,11 +9,30 @@ import {
 } from "@/components";
 import { StockLabel } from "@/components/product/stock-label/StockLabel";
 import { montserrat } from "@/config/font";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface ProductPageProps {
   params: {
     slug: string;
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: ProductPageProps): Promise<Metadata> {
+  const slug = params.slug;
+
+  const product = await getProductBySlug(slug);
+
+  return {
+    title: product?.title ?? "Producto no encontrado",
+    description: product?.description ?? "",
+    openGraph: {
+      title: product?.title ?? "Producto no encontrado",
+      description: product?.description ?? "",
+      images: [`/products/${product?.images[1]}`],
+    },
   };
 }
 
