@@ -1,11 +1,14 @@
+export const revalidate = 60 * 60 * 24 * 7; // 1 week
+
+import { getProductBySlug } from "@/actions";
 import {
   QuantitySelector,
   SizeSelector,
   Slideshow,
   SlideshowMobile,
 } from "@/components";
+import { StockLabel } from "@/components/product/stock-label/StockLabel";
 import { montserrat } from "@/config/font";
-import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
 
 interface ProductPageProps {
@@ -14,9 +17,9 @@ interface ProductPageProps {
   };
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
+export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = params;
-  const product = initialData.products.find((product) => product.slug === slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
@@ -39,6 +42,7 @@ export default function ProductPage({ params }: ProductPageProps) {
       </div>
 
       <div className="col-span-1 px-5">
+        <StockLabel slug={slug} />
         <h1 className={`${montserrat.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>
