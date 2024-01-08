@@ -1,7 +1,8 @@
 "use client";
 
 import { QuantitySelector, SizeSelector } from "@/components";
-import { Product, Size } from "@/interfaces";
+import { CartProduct, Product, Size } from "@/interfaces";
+import { useCartStore } from "@/store";
 import React, { useState } from "react";
 
 interface AddToCartProps {
@@ -9,6 +10,8 @@ interface AddToCartProps {
 }
 
 export const AddToCart = ({ product }: AddToCartProps) => {
+  const addProductToCart = useCartStore((state) => state.addProductToCart);
+
   const [size, setSize] = useState<Size | undefined>();
   const [quantity, setQuantity] = useState<number>(1);
   const [posted, setPosted] = useState<boolean>(false);
@@ -17,6 +20,22 @@ export const AddToCart = ({ product }: AddToCartProps) => {
     setPosted(true);
 
     if (!size) return;
+
+    const cartProduct: CartProduct = {
+      id: product.id,
+      slug: product.slug,
+      title: product.title,
+      price: product.price,
+      image: product.images[0],
+      size,
+      quantity,
+    };
+
+    addProductToCart(cartProduct);
+
+    setPosted(false);
+    setSize(undefined);
+    setQuantity(1);
   };
 
   return (
