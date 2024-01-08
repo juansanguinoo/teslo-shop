@@ -1,13 +1,6 @@
-import { QuantitySelector, Title } from "@/components";
-import { initialData } from "@/seed/seed";
-import Image from "next/image";
+import { Title } from "@/components";
 import Link from "next/link";
-
-const productsInCart = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2],
-];
+import { ProductsInCart } from "./ui/ProductsInCart";
 
 export default function CartPage() {
   return (
@@ -22,28 +15,7 @@ export default function CartPage() {
               Continúa comprando
             </Link>
 
-            {productsInCart.map((product) => (
-              <div className="flex mb-5" key={product.slug}>
-                <Image
-                  src={`/products/${product.images[0]}`}
-                  alt={product.title}
-                  width={100}
-                  height={100}
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                  }}
-                  className="mr-5 rounded"
-                />
-
-                <div className="">
-                  <p>{product.title}</p>
-                  <p>{product.price}</p>
-                  <QuantitySelector quantity={3} />
-                  <button className="underline mt-3">Remover</button>
-                </div>
-              </div>
-            ))}
+            <ProductsInCart />
           </div>
 
           <div className="bag-wihte rounded-xl shadow-xl p-7 h-fit">
