@@ -10,3 +10,4 @@ export * from "./product/slideshow/Slideshow";
 export * from "./product/slideshow/SlideshowMobile";
 export * from "./ui/footer/Footer";
 export * from "./ui/pagination/Pagination";
+export * from "./provider/Provider";

@@ -3,6 +3,7 @@
 import { logout } from "@/actions";
 import { useUIstore } from "@/store";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import {
@@ -19,6 +20,8 @@ import {
 export const Sidebar = () => {
   const isSideMenuOpen = useUIstore((state) => state.isSideMenuOpen);
   const closeSideMenu = useUIstore((state) => state.closeSideMenu);
+
+  const { data: session } = useSession();
 
   return (
     <div>
@@ -77,7 +80,8 @@ export const Sidebar = () => {
         </Link>
 
         <Link
-          href="/"
+          href="/auth/login"
+          onClick={() => closeSideMenu()}
           className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
         >
           <IoLogInOutline size={30} />
